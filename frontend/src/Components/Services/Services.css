@@ -1,14 +1,9 @@
-:root {
-    --primary-color: #CB6328;   
-    --secondary-color: #FF1F4F; 
-    --accent-color: #18164E;    
-    --background-image: url('../assets/background.jpg'); 
-}
+
 
 .services {
     padding: 20px;
     text-align: center;
-    background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+    background-color: #F8F2D8;
     color: #ffffff;
 }
 
@@ -33,7 +28,8 @@
     width: 30%;
     padding: 15px;
     background: url('../assets/background.jpg') no-repeat center center; 
-    background-size: cover; 
+    background-size: cover;
+    /* filter: blur(8px); */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;

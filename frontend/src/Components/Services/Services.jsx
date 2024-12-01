@@ -1,8 +1,8 @@
 import React from 'react';
 import './Services.css';
-import Card from '../assets/card.png';
-import Roll from '../assets/roll.png';
-import Point from '../assets/points.png';
+import Card from '../assets/SPECIALCARDS.SARANGI.jpg';
+import Roll from '../assets/ROLLS.SARANGI.jpg';
+import Point from '../assets/COINS.SARANGI.jpg';
 
 
 const Services = () => {

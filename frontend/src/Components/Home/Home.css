@@ -9,7 +9,7 @@
     flex: 1 1 30%; 
     max-width: 300px; 
     padding: 20px;
-    background-color: var(--accent-color);
+    background-color:  #F8F2D8;
     border-radius: 12px;
     box-shadow: 0 6px 20px var(--shadow-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;

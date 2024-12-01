@@ -1,9 +1,9 @@
 import React from 'react'
 import './Home.css'
 import image1 from '../assets/image1.png'
-import image2 from '../assets/image2.png'
+
 import image3 from '../assets/image3.png'
-import image4 from '../assets/image4.png'
+
 
 const Home = () => {
   return (
@@ -14,15 +14,11 @@ const Home = () => {
           <div className="subject-card">
             <img src={image1} alt="#" />
           </div>
-          <div className="subject-card">
-            <img src={image2} alt="#" />
-          </div>
+         
           <div className="subject-card">
             <img src={image3} alt="#" />
           </div>
-          <div className="subject-card">
-            <img src={image4} alt="#" />
-          </div>
+         
           
         </div>
       </div>
