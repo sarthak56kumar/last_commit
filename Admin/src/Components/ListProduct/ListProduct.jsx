@@ -16,6 +16,7 @@ const ListProduct = () => {
         throw new Error('Failed to fetch products');
       }
       const data = await response.json();
+      console.log(data);
       setAllProducts(data);
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -45,6 +46,7 @@ const ListProduct = () => {
         <p>Products</p>
         <p>Title</p>
         <p>Price</p>
+        <p>Point</p>
         <p>Rating</p>
         <p>AGR</p>
         <p>APPS</p>
@@ -60,6 +62,7 @@ const ListProduct = () => {
             <img src={product.image} alt={product.name} className="listproduct-product-icon" />
             <p>{product.name}</p>
             <p>${product.price}</p>
+            <p>{product.point}</p>
             <p>{product.rating}</p>
             <p>{product.AGR}</p>
             <p>{product.APPS}</p>

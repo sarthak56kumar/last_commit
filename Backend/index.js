@@ -14,8 +14,7 @@ import axios from 'axios';
 import { uploadRouter } from './uploading.js';
 import { createRouteHandler } from 'uploadthing/express';
 
-
-// const stripe = new Stripe('sk_test_51Q8QNCLN3ffFuuHqx37c88SNzKc1X1kaSsOSxNqcr8OpDoVn8n2P40WRTczy4dnAyFQ8vh0cuHYmcfyhSsZVuqbV00cNAiEnge');
+const stripe = new Stripe('sk_test_51Q8QNCLN3ffFuuHqx37c88SNzKc1X1kaSsOSxNqcr8OpDoVn8n2P40WRTczy4dnAyFQ8vh0cuHYmcfyhSsZVuqbV00cNAiEnge');
 
 
 const app = express();
@@ -161,6 +160,7 @@ const ProductSchema = new mongoose.Schema({
   category: { type: String, required: true },
   rating: { type: Number, required: true },
   price: { type: Number, required: true },
+  point: { type: Number, required: true },
   AGR: { type: Number, required: true },
   APPS: { type: Number, required: true },
   GA_TW_SV: { type: String, required: true },
@@ -172,6 +172,7 @@ const Product = mongoose.model('Product', ProductSchema);
 
 // Add Product Endpoint
 app.post('/addproduct', async (req, res) => {
+  console.log("Received data:", req.body); 
   try {
     let products = await Product.find({});
     let id = products.length > 0 ? products.slice(-1)[0].id + 1 : 1;
@@ -183,6 +184,7 @@ app.post('/addproduct', async (req, res) => {
       category: req.body.category,
       rating: req.body.rating,
       price: req.body.price,
+      point: req.body.point,
       AGR: req.body.AGR,
       APPS: req.body.APPS,
       GA_TW_SV: req.body.GA_TW_SV,
@@ -190,7 +192,7 @@ app.post('/addproduct', async (req, res) => {
     });
     await product.save();
     res.json({ success: true, product });
-
+    console.log(product);
   } catch (err) {
     console.error('Add Product Error:', err.message);
     res.status(400).json({ success: false, message: err.message });
@@ -210,10 +212,10 @@ app.post('/removeproduct', async (req, res) => {
 
 // Get All Products Endpoint
 app.get('/allproducts', async (req, res) => {
-  console.log('Received request for /allproducts'); 
+  console.log('Received request for /allproducts');  
   try {
     let products = await Product.find({});
-    // console.log('Products retrieved:', products); 
+    console.log('Products retrieved:', products);
     res.send(products);
   } catch (err) {
     console.error('Get All Products Error:', err.message);
@@ -285,6 +287,47 @@ router.post('/create-checkout-session', async (req, res) => {
     }
 });
 app.use('/api', router);
+
+app.get('/user/points/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);  
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ points: user.points });  
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch user points' });
+  }
+});
+
+app.patch('/user/points/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const { points } = req.body; 
+
+  try {
+    const user = await User.findById(userId); 
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (points < 0) {
+      return res.status(400).json({ message: 'Points cannot be negative' });
+    }
+
+    user.points = points; 
+    await user.save(); 
+
+    res.json({ message: 'User points updated successfully', points: user.points });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to update user points' });
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Server running on ${port}`);

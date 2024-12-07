@@ -8,6 +8,7 @@ const AddProduct = () => {
     name: "",
     category: "cards",
     price: "",
+    point:"",
     rating: "",
     AGR: "",
     APPS: "",
@@ -59,8 +60,8 @@ const AddProduct = () => {
   const addProduct = async (e) => {
     e.preventDefault();
 
-    const { name, price, rating, AGR, APPS, value } = productDetails;
-    if (!name || !price || !rating || !AGR || !APPS || !value) {
+    const { name, price, rating, AGR, APPS, value,point } = productDetails;
+    if (!name || !price || !rating || !AGR || !APPS || !value || !point) {
       alert('Please fill out all fields.');
       return;
     }
@@ -115,6 +116,17 @@ const AddProduct = () => {
             onChange={changeHandler}
             type="text"
             name="price"
+            placeholder="Type Here"
+            required
+          />
+        </div>
+        <div className="addproduct-itemfield">
+          <p>Point</p>
+          <input
+            value={productDetails.point}
+            onChange={changeHandler}
+            type="text"
+            name="point"
             placeholder="Type Here"
             required
           />

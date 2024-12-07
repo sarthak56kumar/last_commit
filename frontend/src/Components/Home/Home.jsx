@@ -10,7 +10,7 @@ const Home = () => {
     <div className="explore-container">
       <div className="branch-row">
         <h2>Explore Our Game</h2>
-        <div className="subject-row">
+        <div className="home-row">
           <div className="subject-card">
             <img src={image1} alt="#" />
           </div>

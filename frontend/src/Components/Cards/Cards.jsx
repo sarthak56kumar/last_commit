@@ -8,6 +8,11 @@ const Cards = () => {
   const [newCard, setNewCard] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState(null);
+  const [userPoints, setUserPoints] = useState(100);
+  const [userCards, setUserCards] = useState([]);
+  const [userId, setUserId] = useState('');
+
+
 
   useEffect(() => {
     // Fetch latest 20 cards or search results based on searchTerm
@@ -36,6 +41,37 @@ const Cards = () => {
     fetchCards();
   }, [searchTerm]); // Re-run the effect if searchTerm changes
 
+
+
+   const handlePurchaseWithPoints = (id, points) => {
+    if (userPoints >= points) {
+      setUserPoints(userPoints - points);
+      const url = `http://localhost:4000/user/points/${userId}`;
+      const updatedPoints = { points: userPoints - points };
+      fetch(url, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedPoints),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Failed to update points');
+          }
+          return response.json();
+        })
+        .then(() => {
+          setUserCards([...userCards, { id, points }]); 
+          alert("Card purchased successfully!");
+        })
+        .catch((error) => {
+          console.error('Error updating points:', error);
+          alert("Failed to update points. Please try again.");
+        });
+    } else {
+      alert("You don't have enough points to purchase this card.");
+    }
+  };
+
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value.trim());
   };
@@ -45,7 +81,7 @@ const Cards = () => {
     console.log('Search submitted for:', searchTerm);
   };
 
-  const handlePurchase = (price, cardTitle) => {
+  const handlePurchaseWithMoney = (price, cardTitle) => {
     navigate('/payment', { state: { amount: price, cardTitle: cardTitle } });
   };
 
@@ -67,18 +103,29 @@ const Cards = () => {
 
       {/* Display cards */}
       <div className="cards-container">
-        {newCard.length > 0 ? (
-          newCard.map((card) => (
-            <Item key={card.id} id={card.id} image={card.image} price={card.price}>
-              <button className="buy-button" onClick={() => handlePurchase(card.price, card.title)}>
-                Purchase
-              </button>
-            </Item>
-          ))
-        ) : (
-          <p>No cards found.</p>
-        )}
-      </div>
+  {newCard.length > 0 ? (
+    newCard.map((card) => (
+      <Item key={card.id} id={card.id} image={card.image} price={card.price} point={card.point}>
+        <button
+          className="buy-button"
+          onClick={() => handlePurchaseWithMoney(card.id, card.price)}
+        >
+          Purchase with Money
+        </button>
+        <button
+          className="buy-button"
+          onClick={() => handlePurchaseWithPoints(card.id, card.point)}
+        >
+          Purchase with Points
+        </button>
+        
+      </Item>
+    ))
+  ) : (
+    <p>No cards found.</p>
+  )}
+</div>
+
     </>
   );
 };

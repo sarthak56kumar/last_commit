@@ -6,6 +6,7 @@
   margin: 10px;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
 
 .item-image {
@@ -19,8 +20,33 @@
   margin: 10px 0;
 }
 
-.item-price {
+.item-price-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
   font-size: 1.1em;
-  color: #28a745; /* Green color for price */
-  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.item-price {
+  margin-right: 10px;
+  margin-left: -20px;
+}
+
+
+.buy-button-container {
+  display: flex;
+  justify-content: space-between; 
+  gap: 10px; 
+  margin-top: 10px;
+}
+
+.buy-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 48%; 
 }
