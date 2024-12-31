@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <img src={logo} alt="GameZone Logo" style={{ height: '50px', width: 'auto' }} />
+        <img src={logo} alt="GameZone Logo" style={{ height: '150px', width: 'auto' }} />
         <p style={{ marginTop: '5px', color: '#ffffff', fontSize: '1rem' }}>BeingSarangi</p>
       </div>
       <div className="signup-button">

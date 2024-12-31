@@ -12,6 +12,7 @@ const AddProduct = () => {
     rating: "",
     AGR: "",
     APPS: "",
+    CMD: "",
     GA_TW_SV: "GA",
     value: "",
   });
@@ -60,8 +61,8 @@ const AddProduct = () => {
   const addProduct = async (e) => {
     e.preventDefault();
 
-    const { name, price, rating, AGR, APPS, value,point } = productDetails;
-    if (!name || !price || !rating || !AGR || !APPS || !value || !point) {
+    const { name, price, rating, AGR, APPS,CMD, value,point } = productDetails;
+    if (!name || !price || !rating || !AGR || !APPS || !CMD || !value || !point) {
       alert('Please fill out all fields.');
       return;
     }
@@ -165,6 +166,17 @@ const AddProduct = () => {
           />
         </div>
         <div className="addproduct-itemfield">
+          <p>CMD</p>
+          <input
+            value={productDetails.CMD}
+            onChange={changeHandler}
+            type="text"
+            name="CMD"
+            placeholder="Type Here"
+            required
+          />
+        </div>
+        <div className="addproduct-itemfield">
           <p>Select any one</p>
           <select
             value={productDetails.GA_TW_SV}
@@ -224,4 +236,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default AddProduct;

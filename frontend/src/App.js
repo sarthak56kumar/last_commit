@@ -13,6 +13,7 @@ import Payment from './Components/Payment/Payment';
 import Success from './Components/Success/Success';
 import Points from './Components/Points/Points';
 import Rolls from './Components/Rolls/Rolls';
+import Rules from './Components/rules/rules';
 
 const Layout = ({ children, showFooter = false, noLayout = false }) => {
   if (noLayout) {
@@ -42,6 +43,7 @@ function App() {
       <Route path="/points" element={<Layout><Points /></Layout>} />
       <Route path="/rolls" element={<Layout><Rolls /></Layout>} />
       <Route path="/payment" element={<Layout><Payment /></Layout>} />
+      <Route path="/rules" element={<Layout><Rules /></Layout>} />
       <Route path="/success" element={<Layout noLayout={true}><Success /></Layout>} />
     </Routes>
   );
@@ -56,6 +58,3 @@ function Main() {
 }
 
 export default Main;
-
-
-

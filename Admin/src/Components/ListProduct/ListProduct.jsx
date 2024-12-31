@@ -33,7 +33,7 @@ const ListProduct = () => {
         },
         body: JSON.stringify({ id: id }),
       });
-      fetchInfo(); // Refresh the product list after removal
+      fetchInfo();
     } catch (error) {
       console.error('Error removing product:', error);
     }
@@ -50,9 +50,9 @@ const ListProduct = () => {
         <p>Rating</p>
         <p>AGR</p>
         <p>APPS</p>
+        <p>CMD</p>
         <p>GA/TW/SV</p>
         <p>Value</p>
-        <p>Category</p>
         <p>Remove</p>
       </div>
       <div className="listproduct-allproducts">
@@ -66,9 +66,9 @@ const ListProduct = () => {
             <p>{product.rating}</p>
             <p>{product.AGR}</p>
             <p>{product.APPS}</p>
+            <p>{product.CMD ? product.CMD : 'N/A'}</p> 
             <p>{product.GA_TW_SV}</p>
             <p>{product.value}</p>
-            <p>{product.category}</p>
             <img onClick={() => { remove_product(product.id) }} className='listproduct-remove-icon' src={cross_icon} alt="Remove" />
             <hr />
           </div>
@@ -79,4 +79,3 @@ const ListProduct = () => {
 };
 
 export default ListProduct;
-
